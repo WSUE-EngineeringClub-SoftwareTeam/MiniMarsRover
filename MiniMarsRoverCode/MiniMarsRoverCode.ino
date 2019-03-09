@@ -30,17 +30,17 @@ void setup() {
 }
 
 void loop() {
-  while (Serial.available() && testCtr != 0) {
+//  while (Serial.available() && testCtr != 0) {
     recvWithStartEndMarkers();
-    Serial.print("before parse: ");
-    Serial.println(receivedChars);
+//    Serial.print("before parse: ");
+//    Serial.println(receivedChars);
     parseCommand();
-      Serial.print("After parse: ");
-    Serial.println(receivedChars);
+//      Serial.print("After parse: ");
+//    Serial.println(receivedChars);
     showNewData();
     driveMotors(parsedCmd);//receivedChars);
-    testCtr--;
-  }
+//    testCtr--;
+//  }
 }
  
 void recvWithStartEndMarkers() {
@@ -90,24 +90,24 @@ void parseCommand() {
   int index =0;
   int dropIncompleteCmd = 0;
   char tempArray[numChars-cmdSize];
-  Serial.print("index: ");
-  Serial.println(index);
+//  Serial.print("index: ");
+//  Serial.println(index);
   for (index; index<cmdSize; index++) {
     parsedCmd[index] = receivedChars[index];
   }
   //parsedCmd[index] = '\0';  // C automatically initializes arrays to 0
-  Serial.print("index: ");
-  Serial.println(index);
-  Serial.print("parsed cmd: ");
-  Serial.println(parsedCmd);
+//  Serial.print("index: ");
+//  Serial.println(index);
+//  Serial.print("parsed cmd: ");
+//  Serial.println(parsedCmd);
   // the following code truncates the input array to exclude the parsed instruction
   for (int i=0; receivedChars[index] != '\0'; i++) {
     tempArray[i] = receivedChars[index];
     index++;
     dropIncompleteCmd++;
   }
-  Serial.print("index: ");
-  Serial.println(index);
+//  Serial.print("index: ");
+//  Serial.println(index);
   if (dropIncompleteCmd <= 3){
     for (int i=0; receivedChars[i] != '\0'; i++) {
       receivedChars[i] = '\0';
@@ -130,19 +130,19 @@ void driveMotors(char cmdArray[]) {
         Serial2.write(80); 
         Serial2.write(192);
         delay(1000);
-        Serial2.write(0)
+        Serial2.write(0);
         break;
       case 1000: // Drives right motors forward
         Serial2.write(64);
         Serial2.write(208);
         delay(1000);
-        Serial2.write(0)
+        Serial2.write(0);
         break;
       case 1100: // Drives all four motors forward
         Serial2.write(80);
         Serial2.write(208);
         delay(1000);
-        Serial2.write(0)
+        Serial2.write(0);
         break;
       case 0001: // Drives left motors backward
         // send a value of 1-127 to command motor 1
@@ -157,13 +157,13 @@ void driveMotors(char cmdArray[]) {
         Serial2.write(64);
         Serial2.write(176);
         delay(1000);
-        Serial2.write(0)
+        Serial2.write(0);
         break;
       case 0011: // Drives all four motors backward
         Serial2.write(48);
         Serial2.write(176);
         delay(1000);
-        Serial2.write(0)
+        Serial2.write(0);
         break;
       default: // Stops all motors
         Serial2.write(0); // stops both motors
