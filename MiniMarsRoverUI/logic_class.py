@@ -33,7 +33,7 @@ class SerialController:
 
     def write(self, message):
         self.ser.write(message)
-        print(message)
+       # print(message)
 
 class drivingWindow:
 
@@ -63,30 +63,30 @@ class drivingWindow:
 
     #Configure buttons
     def config(self):
-        self.W_button = pygame.draw.rect(self.window, (0, 0, 240), ((self.width/2)-15, 5, 30, 30))
-        self.A_button = pygame.draw.rect(self.window, (0, 0, 240), ((self.width/2)-55, 45, 30, 30))
-        self.S_button = pygame.draw.rect(self.window, (0, 0, 240), ((self.width/2)-15, 45, 30, 30))
-        self.D_button = pygame.draw.rect(self.window, (0, 0, 240), ((self.width/2)+25, 45, 30, 30))
-        self.X_button = pygame.draw.rect(self.window, (0, 0, 240), ((self.width/2)+25, 85, 30, 30))
-        self.Q_button = pygame.draw.rect(self.window, (0, 0, 240), ((self.width/2)-55, 5, 30, 30))
-        self.E_button = pygame.draw.rect(self.window, (0, 0, 240), ((self.width/2)+25, 5, 30, 30))
+        self.W_button = pygame.draw.rect(self.window, (0, 0, 240), ((self.width/2)-15, (self.height/2) -65, 30, 30))
+        self.A_button = pygame.draw.rect(self.window, (0, 0, 240), ((self.width/2)-55, (self.height/2) -25, 30, 30))
+        self.S_button = pygame.draw.rect(self.window, (0, 0, 240), ((self.width/2)-15, (self.height/2) -25, 30, 30))
+        self.D_button = pygame.draw.rect(self.window, (0, 0, 240), ((self.width/2)+25, (self.height/2) -25, 30, 30))
+        self.X_button = pygame.draw.rect(self.window, (0, 0, 240), ((self.width/2)+25, (self.height/2) +15, 30, 30))
+        self.Q_button = pygame.draw.rect(self.window, (0, 0, 240), ((self.width/2)-55, (self.height/2) -65, 30, 30))
+        self.E_button = pygame.draw.rect(self.window, (0, 0, 240), ((self.width/2)+25, (self.height/2) -65, 30, 30))
         self.configLetters()
 
     def configLetters(self):
         W_text = self.font.render('W', False, (222, 222, 100))
-        self.window.blit(W_text, (((self.width / 2) - 8), 10))
+        self.window.blit(W_text, (((self.width / 2) - 8), (self.height/2) -60))
         S_text = self.font.render('S', False, (222, 222, 100))
-        self.window.blit(S_text, (((self.width / 2) - 8), 50))
+        self.window.blit(S_text, (((self.width / 2) - 8), (self.height/2) -20))
         A_text = self.font.render('A', False, (222, 222, 100))
-        self.window.blit(A_text, (((self.width / 2) - 48), 50))
+        self.window.blit(A_text, (((self.width / 2) - 48), (self.height/2) -20))
         D_text = self.font.render('D', False, (222, 222, 100))
-        self.window.blit(D_text, (((self.width / 2) + 32), 50))
+        self.window.blit(D_text, (((self.width / 2) + 32),  (self.height/2) -20))
         Q_text = self.font.render('Q', False, (222, 222, 100))
-        self.window.blit(Q_text, (((self.width / 2) + 32), 10))
+        self.window.blit(Q_text, (((self.width / 2) + 32),  (self.height/2) -60))
         E_text = self.font.render('E', False, (222, 222, 100))
-        self.window.blit(E_text, (((self.width / 2) - 48), 10))
+        self.window.blit(E_text, (((self.width / 2) - 48),  (self.height/2) -60))
         X_text = self.font.render('X', False, (222, 222, 100))
-        self.window.blit(X_text, (((self.width / 2) + 32), 90))
+        self.window.blit(X_text, (((self.width / 2) + 32),  (self.height/2) +20))
 
     #Watch for events, upon certain events change
     #relevant member attributes (probably last button selected)
@@ -98,27 +98,30 @@ class drivingWindow:
                 if event.type == pygame.KEYDOWN:
                     pressed = pygame.key.get_pressed()
                     if pressed[pygame.K_w]:
-                        self.W_button= pygame.draw.rect(self.window, (240, 0, 240), ((self.width/2)-15, 5, 30, 30))
+                        self.W_button= pygame.draw.rect(self.window,  (240, 0, 240), ((self.width/2)-15, (self.height/2) -65, 30, 30))
                         self.recentCommand = 'w'
                     if pressed[pygame.K_a]:
-                        self.A_button= pygame.draw.rect(self.window, (240, 0, 240), ((self.width/2)-55, 45, 30, 30))
+                        self.A_button= self.A_button = pygame.draw.rect(self.window, (240, 0, 240), ((self.width/2)-55, (self.height/2) -25, 30, 30))
                         self.recentCommand = 'a'
                     if pressed[pygame.K_s]:
-                        self.S_button=pygame.draw.rect(self.window, (240, 0, 240), ((self.width/2)-15, 45, 30, 30))
+                        self.S_button=pygame.draw.rect(self.window, (240, 0, 240), ((self.width/2)-15, (self.height/2) -25, 30, 30))
                         self.recentCommand = 's'
                     if pressed[pygame.K_d]:
-                        self.D_button=pygame.draw.rect(self.window, (240, 0, 240), ((self.width/2)+25, 45, 30, 30))
+                        self.D_button=pygame.draw.rect(self.window, (240, 0, 240), ((self.width/2)+25, (self.height/2) -25, 30, 30))
                         self.recentCommand = 'd'
                     if pressed[pygame.K_q]:
-                        self.Q_button= pygame.draw.rect(self.window, (240, 0, 240), ((self.width/2)-55, 5, 30, 30))
+                        self.Q_button= pygame.draw.rect(self.window, (240, 0, 240), ((self.width/2)-55, (self.height/2) -65, 30, 30))
                         self.recentCommand = 'q'
                     if pressed[pygame.K_e]:
-                        self.E_button=pygame.draw.rect(self.window, (240, 0, 240), ((self.width/2)+25, 5, 30, 30))
+                        self.E_button=pygame.draw.rect(self.window, (240, 0, 240), ((self.width/2)+25, (self.height/2) -65, 30, 30))
                         self.recentCommand = 'e'
                     if pressed[pygame.K_x]:
-                        self.X_button=pygame.draw.rect(self.window, (240, 0, 240), ((self.width/2)+25, 85, 30, 30))
+                        self.X_button=pygame.draw.rect(self.window, (240, 0, 240), ((self.width/2)+25, (self.height/2) +15, 30, 30))
                         self.recentCommand = 'x'
                     self.configLetters()
+
+
+
                 if event.type == pygame.KEYUP:
                     self.config()
 
