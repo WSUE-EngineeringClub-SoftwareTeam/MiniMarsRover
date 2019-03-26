@@ -18,7 +18,7 @@ class SerialController:
     # (Chars?) (Strings?) solution: (leave generic)
 
     def __init__(self):
-        self.ser = serial.Serial()
+        self.ser = serial.Serial(timeout=2)
         self.baudrate = 9600
         self.port = 'COM1'
 
@@ -82,9 +82,9 @@ class drivingWindow:
         D_text = self.font.render('D', False, (222, 222, 100))
         self.window.blit(D_text, (((self.width / 2) + 32),  (self.height/2) -20))
         Q_text = self.font.render('Q', False, (222, 222, 100))
-        self.window.blit(Q_text, (((self.width / 2) + 32),  (self.height/2) -60))
+        self.window.blit(Q_text, (((self.width / 2) - 48 ),  (self.height/2) -60))
         E_text = self.font.render('E', False, (222, 222, 100))
-        self.window.blit(E_text, (((self.width / 2) - 48),  (self.height/2) -60))
+        self.window.blit(E_text, (((self.width / 2) +32),  (self.height/2) -60))
         X_text = self.font.render('X', False, (222, 222, 100))
         self.window.blit(X_text, (((self.width / 2) + 32),  (self.height/2) +20))
 
@@ -95,6 +95,7 @@ class drivingWindow:
              for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.open = False
+                    pygame.quit()
                 if event.type == pygame.KEYDOWN:
                     pressed = pygame.key.get_pressed()
                     if pressed[pygame.K_w]:
@@ -136,7 +137,7 @@ class logicDriver:
 
     def boot(self):
         self.UI.start_up()
-        self.serial.config("COM1")
+        self.serial.config("COM6")
         self.serial.open()
 
     def loop(self):

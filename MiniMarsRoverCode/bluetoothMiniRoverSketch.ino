@@ -1,13 +1,16 @@
 //What needs to be done each cycle? 
 //Check for input data on the bluetooth
-//If we have some, add all of it to our command buffer 
-//While something is in the command buffer, parse a single command off the top and parse it
-//Simplify commands, possible run each one until a next one? for now use delay
+//If we have some, call the drivecar method
+//Write the to motors the most recent command until we get another
+
+///CONTROLS///
 //W = Forward
-//A = Left wheel stop
-//D = right wheel stop
+//A = Backwards Left
+//D = Backwards Right
 //S = Reverse
 //X = Stop all
+//Q = Forward Left
+//E = Forward Right
 
 #define BLUETOOTH Serial1
 #define MOTOR Serial2 
@@ -24,8 +27,6 @@ void loop() {
 }
 
 void driveCar(char recentCommand){
-  
-  recentCommand;
   
   switch(recentCommand){
     case 'x': 
@@ -47,6 +48,16 @@ void driveCar(char recentCommand){
         MOTOR.write(80);
         MOTOR.write(192);
         break;
+    //DOESNT WORK :C
+    //NEED TO FIND NEW INPUTS FOR "DRIVE BACK AND LEFT"
+    case 'q': 
+        MOTOR.write(54);
+        MOTOR.write(180); 
+        break;
+    case 'e':
+        MOTOR.write(64);
+        MOTOR.write(176);
+        break;
   }
   
 }
@@ -56,7 +67,5 @@ void respondToData(){
   if(BLUETOOTH.available() > 0){
       newCommand = BLUETOOTH.read();
       driveCar(newCommand);
-  }
-  
- 
+  } 
 }
