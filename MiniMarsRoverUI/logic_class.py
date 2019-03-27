@@ -32,7 +32,7 @@ class SerialController:
 
     def write(self, message):
         self.ser.write(message)
-        print(message)
+        # print(message)
 
 class drivingWindow:
 
@@ -99,9 +99,11 @@ class drivingWindow:
                     pg.quit()
                 if event.type == pg.KEYDOWN:
                     pressed = pg.key.get_pressed()
+                    mods = pg.key.get_mods()
                     if pressed[pg.K_w]:
                         self.W_button= pg.draw.rect(self.window,  (240, 0, 240), ((self.width/2)-15, (self.height/2) -65, 30, 30))
                         self.recentCommand = 'w'
+                        print(pressed[pg.K_w])
                     if pressed[pg.K_a]:
                         self.A_button= self.A_button = pg.draw.rect(self.window, (240, 0, 240), ((self.width/2)-55, (self.height/2) -25, 30, 30))
                         self.recentCommand = 'a'
@@ -209,7 +211,8 @@ class loginScreen:
     def confirm_input(self, user_input):
         if 3 < len(user_input) < 5:
             if user_input[0] == 'C':
-                if int(user_input[3]):
+                try:
+                    int(user_input[3])
                     self.valid_input = user_input
                     test_serial = serial.Serial()
                     test_serial.baudrate = 9600
@@ -222,6 +225,8 @@ class loginScreen:
                         print(e)
                         self.error_found = True
                         self.error_text = str(e)
+                except:
+                    return
 
 class logicDriver:
 
@@ -251,7 +256,6 @@ class logicDriver:
 
 # Runs our program (The logic class)
 
-print(pg.font.get_fonts())
 program = logicDriver()
 program.boot_login()
 program.boot_controller()

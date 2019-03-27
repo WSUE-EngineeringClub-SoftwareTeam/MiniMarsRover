@@ -13,6 +13,8 @@
 //Q = Forward Left
 //E = Forward Right
 
+
+
 #define BLUETOOTH Serial1
 #define MOTOR Serial2 
 #define TERMINAL Serial
@@ -27,6 +29,13 @@ void loop() {
     respondToData();
 }
 
+//MOTOR WRITE DOCUMENTATION//
+//192     -> STOPS THE RIGHT SIDE
+//160-192 -> Range for driving right motor forward
+//192-224 -> Range for driving right motor backward
+//64      -> STOPS THE LEFT SIDE
+//32-64   -> Range for driving left motor forward
+//64-96   -> Range for driving left motor backward
 void driveCar(char recentCommand){
   
   switch(recentCommand){
@@ -35,11 +44,15 @@ void driveCar(char recentCommand){
         break;
     case 's':
         MOTOR.write(80);
-        MOTOR.write(200);
+        MOTOR.write(206);
         break;
     case 'w':
-       MOTOR.write(48);
-       MOTOR.write(176);
+       MOTOR.write(42);
+       MOTOR.write(170);
+       break;
+	case 'W':
+       MOTOR.write(54);
+       MOTOR.write(182);
        break;
     case 'a':
         MOTOR.write(64);
@@ -49,14 +62,11 @@ void driveCar(char recentCommand){
         MOTOR.write(80);
         MOTOR.write(192);
         break;
-    //DOESNT WORK 
-    //NEED TO FIND NEW INPUTS FOR "DRIVE BACK AND LEFT"
-	//try using 160 instead of 180 for case q - derek
-    case 'q': 
-        MOTOR.write(54);
-        MOTOR.write(180); 
+    case 'e': 
+        MOTOR.write(50);
+        MOTOR.write(192); 
         break;
-    case 'e':
+    case 'q':
         MOTOR.write(64);
         MOTOR.write(176);
         break;
