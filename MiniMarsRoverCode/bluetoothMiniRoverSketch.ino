@@ -1,3 +1,4 @@
+
 //What needs to be done each cycle? 
 //Check for input data on the bluetooth
 //If we have some, call the drivecar method
@@ -48,8 +49,9 @@ void driveCar(char recentCommand){
         MOTOR.write(80);
         MOTOR.write(192);
         break;
-    //DOESNT WORK :C
+    //DOESNT WORK 
     //NEED TO FIND NEW INPUTS FOR "DRIVE BACK AND LEFT"
+	//try using 160 instead of 180 for case q - derek
     case 'q': 
         MOTOR.write(54);
         MOTOR.write(180); 
